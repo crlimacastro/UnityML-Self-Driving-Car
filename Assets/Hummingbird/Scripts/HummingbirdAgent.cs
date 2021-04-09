@@ -74,11 +74,11 @@ public class HummingbirdAgent : Agent
     /// </summary>
     public override void OnEpisodeBegin()
     {
-        if (trainingMode)
-        {
+        //if (trainingMode)
+        //{
             // Only reset flowers in training when there is one agent per area
             flowerArea.ResetFlowers();
-        }
+        //}
 
         // Reset nectar obtained
         NectarObtained = 0f;
@@ -203,23 +203,34 @@ public class HummingbirdAgent : Agent
 
         // Forward/backward
         if (Input.GetKey(KeyCode.W)) forward = transform.forward;
+        else if (Input.GetAxis("Vertical Left Stick") > 0.5f) forward = transform.forward;
         else if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
+        else if (Input.GetAxis("Vertical Left Stick") < -0.5f) forward = -transform.forward;
+
 
         // Left/right
         if (Input.GetKey(KeyCode.A)) left = -transform.right;
+        else if (Input.GetAxis("Horizontal Left Stick") > 0.5f) left = transform.right;
         else if (Input.GetKey(KeyCode.D)) left = transform.right;
+        else if (Input.GetAxis("Horizontal Left Stick") < -0.5f) left = -transform.right;
 
-        // Left/right
+        // Up/down
         if (Input.GetKey(KeyCode.LeftShift)) up = transform.up;
+        else if (Input.GetButton("Fly Up")) up = transform.up;
         else if (Input.GetKey(KeyCode.LeftControl)) up = -transform.up;
+        else if (Input.GetButton("Fly Down")) up = -transform.up;
 
         // Pitch up/down
-        if (Input.GetKey(KeyCode.UpArrow)) pitch = 1f;
-        else if (Input.GetKey(KeyCode.DownArrow)) pitch = -1f;
+        if (Input.GetKey(KeyCode.UpArrow)) pitch = FlightControls.Inverted ? 1f : -1f;
+        else if (Input.GetAxis("Vertical Right Stick") > 0.5f) pitch = FlightControls.Inverted ? 1f : -1f;
+        else if (Input.GetKey(KeyCode.DownArrow)) pitch = FlightControls.Inverted ? -1f : 1f;
+        else if (Input.GetAxis("Vertical Right Stick") < -0.5f) pitch = FlightControls.Inverted ? -1f : 1f;
 
         // Turn left/right
         if (Input.GetKey(KeyCode.LeftArrow)) yaw = -1f;
+        else if (Input.GetAxis("Horizontal Right Stick") < -0.5f) yaw = -1f;
         else if (Input.GetKey(KeyCode.RightArrow)) yaw = 1f;
+        else if (Input.GetAxis("Horizontal Right Stick") > 0.5f) yaw = 1f;
 
         // Combine the movement vectors and normalize
         Vector3 combined = (forward + left + up).normalized;
