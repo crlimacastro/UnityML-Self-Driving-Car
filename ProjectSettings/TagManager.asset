@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - flower_plant
-  - nectar
-  - boundary
+  - vehicle
+  - building
+  - sidewalk
+  - target
   layers:
   - Default
   - TransparentFX
