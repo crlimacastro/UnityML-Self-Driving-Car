@@ -80,6 +80,7 @@ public class TrafficCarAgent : Agent
         if (collider.gameObject.tag == "target")
         {
             AddReward(1f); // Reward for reaching the target
+            EndEpisode();
         }
     }
 
