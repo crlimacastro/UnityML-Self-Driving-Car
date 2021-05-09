@@ -27,25 +27,43 @@ public class TrafficCarAgent : Agent
     // Observations
     public override void CollectObservations(VectorSensor sensor)
     {
+        if (transform)
+        {
+            // Observe the agent's position
+            sensor.AddObservation(transform.position); // Vector3, 3 observations 
+
+            // Observer the agent's local rotation
+            sensor.AddObservation(transform.localRotation.normalized); // Quaternion, (4 observations)
+        }
+        else
+        {
+            sensor.AddObservation(new float[7]);
+        }
         if (transform && currentTarget)
         {
             Vector3 vectorToTarget = currentTarget.position - transform.position;
             // Normalized vector pointing to target
             Vector3 normDirectionToTarget = vectorToTarget.normalized;
-
             sensor.AddObservation(normDirectionToTarget); // Vector3, 3 observations
+
+            // Dot product that indicates whether agent is facing the target
+            // (+1 they are directly facing it directly, -1 they are facing directly away, 0 they are facing perpendicularly left/right)
+            sensor.AddObservation(Vector3.Dot(transform.forward, normDirectionToTarget)); // float, 1 observation
+
+            // Wedge product that indicates whether agent is pointing to the left of target or to the right
+            // (+1 they are pointing right, -1 they are pointing left, 0 they are pointing straight at it or away)
+            float wedge = Vector3.Dot(Vector3.Cross(transform.forward, normDirectionToTarget), transform.up);
+            sensor.AddObservation(wedge); // float, 1 observation
 
             float distanceToTarget = vectorToTarget.magnitude;
             sensor.AddObservation(distanceToTarget); // float, 1 observation
         }
         else
         {
-            // Defaults
-            sensor.AddObservation(Vector3.zero); // Vector3, 3 observations
-            sensor.AddObservation(0); // float, 1 observation
+            sensor.AddObservation(new float[6]);
         }
 
-        // Total observations: 4
+        // Total observations: 13
     }
 
     // Actions

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118357163}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139150750916305067}
@@ -48,9 +48,11 @@ MonoBehaviour:
   - vehicle
   - building
   - sidewalk
+  - props
+  - target
   m_RaysPerDirection: 3
   m_MaxRayDegrees: 90
-  m_SphereCastRadius: 0.36
+  m_SphereCastRadius: 0.25
   m_RayLength: 10
   m_RayLayerMask:
     serializedVersion: 2
@@ -58,8 +60,8 @@ MonoBehaviour:
   m_ObservationStacks: 2
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 1.3
-  m_EndVerticalOffset: -1
+  m_StartVerticalOffset: 1
+  m_EndVerticalOffset: -0.5
 --- !u!1 &1815945600
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815945600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139150750916305067}
@@ -108,9 +110,11 @@ MonoBehaviour:
   - vehicle
   - building
   - sidewalk
+  - props
+  - target
   m_RaysPerDirection: 3
   m_MaxRayDegrees: 90
-  m_SphereCastRadius: 0.36
+  m_SphereCastRadius: 0.25
   m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
@@ -118,8 +122,8 @@ MonoBehaviour:
   m_ObservationStacks: 2
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 1.3
-  m_EndVerticalOffset: -1
+  m_StartVerticalOffset: 1
+  m_EndVerticalOffset: -0.5
 --- !u!1 &4139150750916550115
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 4
+    VectorObservationSize: 13
     NumStackedVectorObservations: 2
     VectorActionSize: 02000000
     VectorActionDescriptions: []
@@ -635,6 +639,8 @@ MonoBehaviour:
   m_BehaviorName: TrafficCar
   TeamId: 0
   m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!114 &1443791256028412617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Record: 0
+  NumStepsToRecord: 0
   DemonstrationName: CarAgentDemo
   DemonstrationDirectory: Demos
 --- !u!1 &4139150750916772643
