@@ -9,7 +9,7 @@ NullGfxDevice:
     Renderer: Null Device
     Vendor:   Unity Technologies
 Begin MonoManager ReloadAssembly
-- Completed reload, in  1.130 seconds
+- Completed reload, in  1.156 seconds
 ERROR: Shader Hidden/Universal Render Pipeline/Blit shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 ERROR: Shader Hidden/Universal Render Pipeline/CopyDepth shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 ERROR: Shader Hidden/Universal Render Pipeline/ScreenSpaceShadows shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
@@ -42,7 +42,7 @@ ERROR: Shader Universal Render Pipeline/Lit shader is not supported on this GPU 
 WARNING: Shader Unsupported: 'Universal Render Pipeline/Lit' - All subshaders removed
 WARNING: Shader Did you use #pragma only_renderers and omit this platform?
 WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
-UnloadTime: 1.255000 ms
+UnloadTime: 0.553100 ms
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libcoreclr.so
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libcoreclr.so.dll
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libcoreclr.so
@@ -61,9 +61,10 @@ Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastr
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libSystem.dylib
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libSystem.dylib.dll
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libSystem.dylib
+failed to get 100ns ticks
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 2020 -> priority: 1 
-  Thread -> id: 7564 -> priority: 1 
-  Thread -> id: 7834 -> priority: 1 
-  Thread -> id: 408c -> priority: 1 
+  Thread -> id: 6f7c -> priority: 1 
+  Thread -> id: 2968 -> priority: 1 
+  Thread -> id: 599c -> priority: 1 
+  Thread -> id: 24c4 -> priority: 1 
 Waiting on threads to park on joinable thread list timed out.

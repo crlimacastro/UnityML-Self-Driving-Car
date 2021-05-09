@@ -9,7 +9,7 @@ NullGfxDevice:
     Renderer: Null Device
     Vendor:   Unity Technologies
 Begin MonoManager ReloadAssembly
-- Completed reload, in  1.183 seconds
+- Completed reload, in  1.180 seconds
 ERROR: Shader Hidden/Universal Render Pipeline/Blit shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 ERROR: Shader Hidden/Universal Render Pipeline/CopyDepth shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
 ERROR: Shader Hidden/Universal Render Pipeline/ScreenSpaceShadows shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
@@ -42,7 +42,7 @@ ERROR: Shader Universal Render Pipeline/Lit shader is not supported on this GPU 
 WARNING: Shader Unsupported: 'Universal Render Pipeline/Lit' - All subshaders removed
 WARNING: Shader Did you use #pragma only_renderers and omit this platform?
 WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
-UnloadTime: 0.446600 ms
+UnloadTime: 0.485200 ms
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libcoreclr.so
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libcoreclr.so.dll
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libcoreclr.so
@@ -62,9 +62,12 @@ Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastr
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libSystem.dylib.dll
 Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data/Mono/libSystem.dylib
 failed to get 100ns ticks
+Unable to save timers to file C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build_NoCars/IGME797-Final_Data\ML-Agents\Timers\Training_timers.json 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug/Debug.bindings.h Line: 35)
+
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 5370 -> priority: 1 
-  Thread -> id: 7bb8 -> priority: 1 
-  Thread -> id: 75d0 -> priority: 1 
-  Thread -> id: 790c -> priority: 1 
+  Thread -> id: 12c0 -> priority: 1 
+  Thread -> id: 835c -> priority: 1 
+  Thread -> id: 1f0 -> priority: 1 
+  Thread -> id: 233c -> priority: 1 
 Waiting on threads to park on joinable thread list timed out.

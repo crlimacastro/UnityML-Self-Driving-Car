@@ -72,16 +72,10 @@ public class TrafficCarAgent : Agent
         // vectorAction[0] == -1 back, 0 nothing, 1 forward
         // vectorAction[1] == -1 turn left, 0 nothing, 1 turn right
 
-        if (vectorAction[0] < 0)
-        {
-            AddReward(-0.01f); // Punish driving back too much
-        }
-
         carDriver.SetInputs(vectorAction[0], vectorAction[1]);
 
         // Existential punishment (5000 if no MaxStep to avoid 0 division)
-        AddReward(-1f / (MaxStep == 0 ? MaxStep : 5000));
-
+        AddReward(-1f / (MaxStep == 0 ? MaxStep : 10000));
     }
 
     // Heuristic (player controlled)
@@ -105,7 +99,7 @@ public class TrafficCarAgent : Agent
     {
         if (IsBadCollision(collision))
         {
-            AddReward(-0.1f); // Smaller punishment for staying
+            AddReward(-0.01f); // Smaller punishment for staying
         }
     }
 
@@ -113,9 +107,9 @@ public class TrafficCarAgent : Agent
     {
         if (collider.gameObject.tag == "target")
         {
-            AddReward(1f); // Reward for reaching the target
+            AddReward(5f); // Reward for reaching the target
             targetPointPool.Return(currentTarget); // Return the target for other agents to go to
-            EndEpisode();
+            Reset();
         }
     }
 
