@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
-using UnityEngine.SceneManagement;
 
 public class TrafficCarAgent : Agent
 {
@@ -28,14 +27,23 @@ public class TrafficCarAgent : Agent
     // Observations
     public override void CollectObservations(VectorSensor sensor)
     {
-        Vector3 vectorToTarget = currentTarget.position - transform.position;
-        // Normalized vector pointing to target
-        Vector3 normDirectionToTarget = vectorToTarget.normalized;
+        if (transform && currentTarget)
+        {
+            Vector3 vectorToTarget = currentTarget.position - transform.position;
+            // Normalized vector pointing to target
+            Vector3 normDirectionToTarget = vectorToTarget.normalized;
 
-        sensor.AddObservation(normDirectionToTarget); // Vector3, 3 observations
+            sensor.AddObservation(normDirectionToTarget); // Vector3, 3 observations
 
-        float distanceToTarget = vectorToTarget.magnitude;
-        sensor.AddObservation(distanceToTarget); // float, 1 observation
+            float distanceToTarget = vectorToTarget.magnitude;
+            sensor.AddObservation(distanceToTarget); // float, 1 observation
+        }
+        else
+        {
+            // Defaults
+            sensor.AddObservation(Vector3.zero); // Vector3, 3 observations
+            sensor.AddObservation(0); // float, 1 observation
+        }
 
         // Total observations: 4
     }
