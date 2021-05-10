@@ -108,7 +108,7 @@ public class TrafficCarAgent : Agent
         if (collider.gameObject.tag == "target")
         {
             AddReward(5f); // Reward for reaching the target
-            targetPointPool.Return(currentTarget); // Return the target for other agents to go to
+            Debug.Log("Reward: " + GetCumulativeReward());
             Reset();
         }
     }
@@ -131,7 +131,21 @@ public class TrafficCarAgent : Agent
         transform.rotation = spawnPoint.rotation;
         spawnPointPool.Return(spawnPoint);
 
-        // Get a random target
+        // Return previous target (if any)
+        if (currentTarget)
+        {
+            targetPointPool.Return(currentTarget); // Return the target for other agents to go to
+        }
+
+        // Get a new random target
         currentTarget = targetPointPool.FetchRandom();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (transform && currentTarget)
+        {
+            Gizmos.DrawRay(transform.position, currentTarget.position - transform.position);
+        }
     }
 }
