@@ -1,0 +1,35 @@
+{
+    "TrafficCar": {
+        "checkpoints": [
+            {
+                "steps": 499960,
+                "file_path": "results\\01_Model\\TrafficCar\\TrafficCar-499960.nn",
+                "reward": -690.9281609132886,
+                "creation_time": 1620623461.8903482
+            },
+            {
+                "steps": 999960,
+                "file_path": "results\\01_Model\\TrafficCar\\TrafficCar-999960.nn",
+                "reward": -419.48254375811666,
+                "creation_time": 1620624561.2353141
+            },
+            {
+                "steps": 1000024,
+                "file_path": "results\\01_Model\\TrafficCar\\TrafficCar-1000024.nn",
+                "reward": -419.48254375811666,
+                "creation_time": 1620624565.2812293
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000024,
+            "file_path": "results\\01_Model\\TrafficCar.nn",
+            "reward": -419.48254375811666,
+            "creation_time": 1620624565.2812293
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.1.0",
+        "mlagents_version": "0.20.0",
+        "tensorflow_version": "2.3.2"
+    }
+}

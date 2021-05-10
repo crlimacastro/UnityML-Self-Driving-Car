@@ -9,6 +9,7 @@ public class TrafficCarAgent : Agent
     private PointPool targetPointPool;
 
     private Transform currentTarget;
+    private float closestReachedToTarget;
 
     // Init Logic (called once on Play)
     public override void Initialize()
@@ -57,6 +58,14 @@ public class TrafficCarAgent : Agent
 
             float distanceToTarget = vectorToTarget.magnitude;
             sensor.AddObservation(distanceToTarget); // float, 1 observation
+
+            // Reward the agent every time they get closer to the target (avoids zero division)
+            if (distanceToTarget < closestReachedToTarget)
+            {
+                closestReachedToTarget = distanceToTarget; // Update the closest the agent has gotten
+                float inverseDistance = distanceToTarget == 0 ? 0 : 1f / distanceToTarget; // Bigger when the agent is closer
+                AddReward(inverseDistance);
+            }
         }
         else
         {
@@ -74,8 +83,9 @@ public class TrafficCarAgent : Agent
 
         carDriver.SetInputs(vectorAction[0], vectorAction[1]);
 
-        // Existential punishment (5000 if no MaxStep to avoid 0 division)
-        AddReward(-1f / (MaxStep == 0 ? MaxStep : 10000));
+        // Existential punishment (avoids 0 division)
+        float existentialPunishment = MaxStep == 0 ? 0 : -1f / MaxStep;
+        AddReward(existentialPunishment);
     }
 
     // Heuristic (player controlled)
@@ -91,7 +101,7 @@ public class TrafficCarAgent : Agent
     {
         if (IsBadCollision(collision))
         {
-            AddReward(-0.5f); // Heavy punishment for colliding with obstacles
+            AddReward(-1f); // Heavy punishment for colliding with obstacles
         }
     }
 
@@ -107,7 +117,7 @@ public class TrafficCarAgent : Agent
     {
         if (collider.gameObject.tag == "target")
         {
-            AddReward(5f); // Reward for reaching the target
+            AddReward(20f); // Reward for reaching the target
             Debug.Log("Reward: " + GetCumulativeReward());
             Reset();
         }
@@ -139,6 +149,8 @@ public class TrafficCarAgent : Agent
 
         // Get a new random target
         currentTarget = targetPointPool.FetchRandom();
+        // Reset closest distance to initial distance
+        closestReachedToTarget = (currentTarget.position - transform.position).magnitude; 
     }
 
     private void OnDrawGizmosSelected()
