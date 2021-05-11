@@ -5,16 +5,16 @@ public class CarDriver : MonoBehaviour
 
     #region Fields
     private float speed;
-    private float speedMax = 20f;
+    private float speedMax = 18f;
     private float speedMin = -20f;
-    private float acceleration = 25f;
+    private float acceleration = 20f;
     private float brakeSpeed = 150f;
-    private float reverseSpeed = 15f;
+    private float reverseSpeed = 10f;
     private float idleSlowdown = 10f;
 
     private float turnSpeed;
     private float turnSpeedMax = 400f;
-    private float turnSpeedAcceleration = 500f;
+    private float turnSpeedAcceleration = 400f;
     private float turnIdleSlowdown = 700f;
 
     private float forwardAmount;

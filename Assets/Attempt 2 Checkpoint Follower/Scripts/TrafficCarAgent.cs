@@ -10,8 +10,8 @@ public class TrafficCarAgent : Agent
 
     // Agent Logic 
     private Path currentPath; // Current path agent is following
-    private int currentCheckpointIndex; // Index pointing to current checkpoint agent is trying to reach
-    private Transform CurrentCheckpoint => currentPath[currentCheckpointIndex]; // Shortcut to current checkpoint transform
+    private Transform currentCheckpoint; // Current checkpoint agent is trying to reach
+    private float distanceMilestone; // Closest distance reached to checkpoint
 
     // Init Logic (called once on Play)
     public override void Initialize()
@@ -30,49 +30,38 @@ public class TrafficCarAgent : Agent
     // Observations
     public override void CollectObservations(VectorSensor sensor)
     {
-        if (transform)
+        if (transform && currentCheckpoint)
         {
-            // Observe the agent's position
-            sensor.AddObservation(transform.position); // Vector3, 3 observations 
-
-            // Observer the agent's local rotation
-            sensor.AddObservation(transform.localRotation.normalized); // Quaternion, (4 observations)
-        }
-        else
-        {
-            sensor.AddObservation(new float[7]);
-        }
-        if (transform && CurrentCheckpoint)
-        {
-            Vector3 vectorToCheckpoint = CurrentCheckpoint.position - transform.position;
+            // Vector pointing to checkpoint
+            Vector3 vectorToCheckpoint = currentCheckpoint.position - transform.position;
             // Normalized vector pointing to checkpoint
             Vector3 normDirToCheckpoint = vectorToCheckpoint.normalized;
 
-            sensor.AddObservation(normDirToCheckpoint); // Vector3, 3 observations
-
-            // Dot product that indicates whether agent is facing the target
+            // Dot product that indicates whether agent is facing the checkpoint
             // (+1 facing it directly, -1 facing directly away, 0 perpendicular left/right)
             sensor.AddObservation(Vector3.Dot(transform.forward, normDirToCheckpoint)); // float, 1 observation
 
-            // Wedge product that indicates whether agent is facing to the left of target or to the right
-            // (+1 facing right, -1 facing left, 0 facing straight at it or away)
-            float wedge = Vector3.Dot(Vector3.Cross(transform.forward, normDirToCheckpoint), transform.up);
+            float distanceToCheckpoint = vectorToCheckpoint.magnitude;
 
-            sensor.AddObservation(wedge); // float, 1 observation
+            sensor.AddObservation(distanceToCheckpoint); // float, 1 observation
 
-            // Dot product that indicates whether the agent is facing in the direction that the checkpoint points to
-            sensor.AddObservation(Vector3.Dot(transform.forward, CurrentCheckpoint.forward)); // float, 1
+            // When the agent gets closer to the next checkpoint
+            if (distanceToCheckpoint < distanceMilestone)
+            {
+                // Update closest distance reached
+                distanceMilestone = distanceToCheckpoint;
 
-            float distanceToTarget = vectorToCheckpoint.magnitude;
+                // Small reward relative to how close to next checkpoint (avoids 0 division)
+                AddReward(distanceToCheckpoint == 0 ? 0 : 1f / distanceToCheckpoint);
+            }
 
-            sensor.AddObservation(distanceToTarget); // float, 1 observation
         }
         else
         {
-            sensor.AddObservation(new float[7]);
+            sensor.AddObservation(new float[2]);
         }
 
-        // Total observations: 14
+        // Total observations: 2
     }
 
     // Actions
@@ -97,48 +86,40 @@ public class TrafficCarAgent : Agent
         actionsOut[1] = Input.GetAxis("Horizontal");
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (IsBadCollision(collision))
-        {
-            AddReward(-0.5f); // Heavy punishment for colliding with obstacles
-        }
-    }
-
     public void OnCollisionStay(Collision collision)
     {
         if (IsBadCollision(collision))
         {
-            AddReward(-0.1f); // Smaller punishment for staying
+            AddReward(-0.1f); // Punishment for staying in bad collision
         }
     }
 
     public void OnTriggerEnter(Collider collider)
     {
         // If it is the current checkpoint the agent is looking for
-        if (collider.transform == CurrentCheckpoint)
+        if (collider.transform == currentCheckpoint)
         {
             AddReward(1f); // Reward for reaching the checkpoint
 
-            // Make checkpoint reached invisible
-            CurrentCheckpoint.GetComponent<MeshRenderer>().enabled = false;
+            // Set previous checkpoint to inactive
+            currentCheckpoint.gameObject.SetActive(false);
 
-            // Update the currentCheckpoint that is being looked for
-            currentCheckpointIndex++;
-
-            // Don't go over the last index of the path (avoid index out of range)
-            currentCheckpointIndex = Mathf.Min(currentCheckpointIndex, currentPath.Count - 1);
-
-            // If this was the last checkpoint in the path
-            if (collider.transform == currentPath.End)
+            // Update the current checkpoint
+            currentCheckpoint = currentPath.GetNextCheckPoint(currentCheckpoint);
+            
+            if (currentCheckpoint)
             {
-                Debug.Log("Reward: " + GetCumulativeReward());
-                Reset();
+                // Update closest distance reached
+                distanceMilestone = GetDistanceToCheckpoint(currentCheckpoint);
+
+                // Set the current checkpoint to active
+                currentCheckpoint.gameObject.SetActive(true);
             }
             else
             {
-                // Make new checkpoint visible
-                CurrentCheckpoint.GetComponent<MeshRenderer>().enabled = true;
+                // Only null if this was the last checkpoint in the path
+                // Reset agent
+                Reset();
             }
         }
     }
@@ -158,22 +139,23 @@ public class TrafficCarAgent : Agent
         // Return previous path being followed (if any)
         if (currentPath)
         {
-            // If the agent has not reached it's checkpoint
-            // (Happens on reset from OnEpisodeBegin)
-            if (CurrentCheckpoint)
-            {
-                // Make the check point that was not reached invisible again
-                CurrentCheckpoint.GetComponent<MeshRenderer>().enabled = false;
-            }
-
             pathPool.Return(currentPath); // Returns path for other agents to use
         }
+
         // Get a random path
         currentPath = pathPool.FetchRandom();
-        // Reset current checkpoint index
-        currentCheckpointIndex = 0;
-        // Go to its start point
+        // Go to its start position and rotation
         transform.position = currentPath.Start.position;
         transform.rotation = currentPath.Start.rotation;
+
+        // Set the current checkpoint to the first in the path
+        currentCheckpoint = currentPath.Start;
+        // Update closest distance reached
+        distanceMilestone = GetDistanceToCheckpoint(currentCheckpoint);
+    }
+
+    private float GetDistanceToCheckpoint(Transform checkpoint)
+    {
+        return (checkpoint.position - transform.position).magnitude;
     }
 }

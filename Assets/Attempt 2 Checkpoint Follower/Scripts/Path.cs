@@ -7,17 +7,18 @@ public class Path : MonoBehaviour
 
     public Transform Start => checkpoints[0];
     public Transform End => checkpoints[checkpoints.Count - 1];
-    public int Count => checkpoints.Count;
-    public Transform this[int i] => checkpoints[i];
 
 
     private void Awake()
     {
-        // Get all checkpoints and add them to the list
+        // Get all checkpoints, make their gameObjects inactive and add them to the list
         // Make each checkpoint's forward face the next one (except the first and last one)
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
+
+            // Set checkpoint to inavtive
+            child.gameObject.SetActive(false);
 
             // Add checkpoint to list
             checkpoints.Add(child);
@@ -37,6 +38,42 @@ public class Path : MonoBehaviour
         if (checkpoints.Count <= 1)
         {
             throw new UnityException("Path must contain at least two checkpoints");
+        }
+    }
+
+    // Every time this object is set to active
+    private void OnEnable()
+    {
+        // Set the start to active
+        Start.gameObject.SetActive(true);
+    }
+
+    // Every time this object is set to inactive
+    private void OnDisable()
+    {
+        // Set each checkpoint to be inactive
+        foreach (Transform checkpoint in checkpoints)
+        {
+            checkpoint.gameObject.SetActive(false);
+        }
+    }
+
+    // Returns the checkpoint that goes after the one provided.
+    // Returns null if no next checkpoint
+    public Transform GetNextCheckPoint(Transform currentCheckpoint)
+    {
+        int i = checkpoints.IndexOf(currentCheckpoint);
+
+        if(i == -1)
+        {
+            throw new UnityException("Checkpoint not found in path");
+        }
+        else if(i == checkpoints.Count - 1) {
+            return null;
+        }
+        else
+        {
+            return checkpoints[i + 1];
         }
     }
 }

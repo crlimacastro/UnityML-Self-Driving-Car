@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Attempt 1 Point A to Point B/Scenes/Attempt 1 Training.unity
-    guid: 2ee3fde2d415f804d8ed14285be64f89
+    path: Assets/Attempt 2 Checkpoint Follower/Scenes/Training.unity
+    guid: 660dcdaa1de2d0c478882770e4211ad2
   m_configObjects: {}

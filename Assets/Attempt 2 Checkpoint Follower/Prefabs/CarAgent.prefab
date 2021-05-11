@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &118357163
+--- !u!1 &2054487645051286041
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,122 +8,58 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 118357164}
-  - component: {fileID: 118357165}
+  - component: {fileID: 1862173882677371608}
+  - component: {fileID: 3959855008366207707}
   m_Layer: 0
-  m_Name: RaysBack
+  m_Name: RaysAround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &118357164
+--- !u!4 &1862173882677371608
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118357163}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -2.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4139150750916305067}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &118357165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118357163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SensorName: RaysBack
-  m_DetectableTags:
-  - vehicle
-  - building
-  - sidewalk
-  - props
-  - target
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 90
-  m_SphereCastRadius: 0.25
-  m_RayLength: 10
-  m_RayLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967291
-  m_ObservationStacks: 2
-  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 1.1
-  m_EndVerticalOffset: -0.5
---- !u!1 &1815945600
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1815945601}
-  - component: {fileID: 1815945602}
-  m_Layer: 0
-  m_Name: RaysForward
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1815945601
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1815945600}
+  m_GameObject: {fileID: 2054487645051286041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139150750916305067}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1815945602
+--- !u!114 &3959855008366207707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1815945600}
+  m_GameObject: {fileID: 2054487645051286041}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SensorName: RaysForward
+  m_SensorName: RaysAround
   m_DetectableTags:
-  - vehicle
-  - building
-  - sidewalk
   - props
-  - target
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 90
-  m_SphereCastRadius: 0.25
+  - building
+  - vehicle
+  m_RaysPerDirection: 16
+  m_MaxRayDegrees: 180
+  m_SphereCastRadius: 0.2
   m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 2
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 1
-  m_EndVerticalOffset: -0.5
+  m_EndVerticalOffset: 0
 --- !u!1 &4139150750916550115
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,10 +455,9 @@ Transform:
   - {fileID: 4139150750916285439}
   - {fileID: 4139150750916330317}
   - {fileID: 4139150750916325293}
-  - {fileID: 1815945601}
-  - {fileID: 118357164}
   - {fileID: 2983497671791218513}
   - {fileID: 2334435927290728221}
+  - {fileID: 1862173882677371608}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -582,7 +517,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4139150750916582487}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5c60b1dc462804d4aa2c9b092c02b049, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -630,8 +565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 14
-    NumStackedVectorObservations: 2
+    VectorObservationSize: 2
+    NumStackedVectorObservations: 1
     VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
@@ -971,7 +906,7 @@ GameObject:
   - component: {fileID: 2334435927290728221}
   - component: {fileID: 4384068586254350699}
   m_Layer: 0
-  m_Name: RayGroundBack
+  m_Name: RaysGroundBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,7 +924,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139150750916305067}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &4384068586254350699
 MonoBehaviour:
@@ -1003,17 +938,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SensorName: RayGroundBack
+  m_SensorName: RaysGroundBack
   m_DetectableTags:
   - sidewalk
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 90
+  m_RaysPerDirection: 1
+  m_MaxRayDegrees: 66
   m_SphereCastRadius: 0.075
-  m_RayLength: 20
+  m_RayLength: 4
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 2
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -1029,7 +964,7 @@ GameObject:
   - component: {fileID: 2983497671791218513}
   - component: {fileID: 1852158172790908998}
   m_Layer: 0
-  m_Name: RayGroundFront
+  m_Name: RaysGroundFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1047,7 +982,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139150750916305067}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1852158172790908998
 MonoBehaviour:
@@ -1061,17 +996,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SensorName: RayGroundFront
+  m_SensorName: RaysGroundFront
   m_DetectableTags:
   - sidewalk
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 90
+  m_RaysPerDirection: 1
+  m_MaxRayDegrees: 66
   m_SphereCastRadius: 0.075
-  m_RayLength: 20
+  m_RayLength: 4
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 2
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
