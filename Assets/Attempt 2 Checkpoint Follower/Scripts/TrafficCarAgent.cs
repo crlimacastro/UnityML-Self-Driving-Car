@@ -4,21 +4,23 @@ using Unity.MLAgents.Sensors;
 
 public class TrafficCarAgent : Agent
 {
-    // Dependencies
+    // External Dependencies
+    [SerializeField] private PathPool pathPool;
+
+    // Components
     private CarDriver carDriver;
-    private PathPool pathPool;
 
     // Agent Logic 
     private Path currentPath; // Current path agent is following
     private Transform currentCheckpoint; // Current checkpoint agent is trying to reach
     private float distanceMilestone; // Closest distance reached to checkpoint
+    private bool inBadCollision = false; // Whether the agent is colliding with objects it shouldn't be (buildings, vehicles, etc.)
 
     // Init Logic (called once on Play)
     public override void Initialize()
     {
         // Dependencies
         carDriver = GetComponent<CarDriver>();
-        pathPool = FindObjectOfType<PathPool>();
     }
 
     // Episode reset logic (called at the start of every episode)
@@ -32,65 +34,119 @@ public class TrafficCarAgent : Agent
     {
         if (transform && currentCheckpoint)
         {
+            // Collect Necessary Data
             // Vector pointing to checkpoint
             Vector3 vectorToCheckpoint = currentCheckpoint.position - transform.position;
             // Normalized vector pointing to checkpoint
             Vector3 normDirToCheckpoint = vectorToCheckpoint.normalized;
 
+            // Orientation Observations
             // Dot product that indicates whether agent is facing the checkpoint
             // (+1 facing it directly, -1 facing directly away, 0 perpendicular left/right)
-            sensor.AddObservation(Vector3.Dot(transform.forward, normDirToCheckpoint)); // float, 1 observation
 
+            float facingCheckpointDot = Vector3.Dot(transform.forward, normDirToCheckpoint);
+            sensor.AddObservation(facingCheckpointDot); // float, 1 observation
+
+            // Wedge product that indicates whether agent is facing to the left of target or to the right
+            // (+1 facing right, -1 facing left, 0 facing straight at it or away)
+            float wedge = Vector3.Dot(Vector3.Cross(transform.forward, normDirToCheckpoint), transform.up);
+
+            sensor.AddObservation(wedge); // float, 1 observation
+
+            // Distance Observations
             float distanceToCheckpoint = vectorToCheckpoint.magnitude;
 
             sensor.AddObservation(distanceToCheckpoint); // float, 1 observation
 
+            // Collision Observations
+            sensor.AddObservation(inBadCollision);
+
+            // Observation Rewards
             // When the agent gets closer to the next checkpoint
             if (distanceToCheckpoint < distanceMilestone)
             {
                 // Update closest distance reached
                 distanceMilestone = distanceToCheckpoint;
 
-                // Small reward relative to how close to next checkpoint (avoids 0 division)
-                AddReward(distanceToCheckpoint == 0 ? 0 : 1f / distanceToCheckpoint);
+                //// Small reward for facing the checkpoint (does not punish by going into the negatives)
+                AddReward(0.001f * Mathf.Clamp01(facingCheckpointDot));
+
+                //// Small reward relative to how close to next checkpoint (avoids 0 division)
+                AddReward(0.01f * distanceToCheckpoint == 0 ? 0 : 1f / distanceToCheckpoint);
             }
 
+            if (inBadCollision)
+            {
+                // Punishment for colliding with objects like buildings, vehicles, etc.
+                AddReward(-0.1f);
+            }
         }
         else
         {
-            sensor.AddObservation(new float[2]);
+            sensor.AddObservation(new float[4]);
         }
 
-        // Total observations: 2
+        // Total observations: 4
     }
 
     // Actions
     public override void OnActionReceived(float[] vectorAction)
     {
-        // vectorAction[0] == -1 back, 0 nothing, 1 forward
-        // vectorAction[1] == -1 turn left, 0 nothing, 1 turn right
+        // vectorAction[0] == 0 back, 1 nothing, 2 forward
+        // vectorAction[1] == 0 turn left, 1 nothing, 2 turn right
 
-        carDriver.SetInputs(vectorAction[0], vectorAction[1]);
+        float forward = vectorAction[0] - 1;
+        float turn = vectorAction[1] - 1;
+
+        carDriver.SetInputs(forward, turn);
+
+        // Action Rewards
+        if (inBadCollision && (forward == -1 || forward == 1))
+        {
+            // Small reward back for moving while in a bad collision
+            // Encouraging agent to get out of bad collisions
+            AddReward(0.01f);
+        }
+
+        if (forward == -1 || forward == 1)
+        {
+            // Small reward for being in movement at all points
+            // To discourage the agent just standing there
+            AddReward(0.001f);
+        }
 
         // Existential punishment (avoids 0 division)
-        float existentialPunishment = MaxStep == 0 ? 0 : -1f / MaxStep;
-        AddReward(existentialPunishment);
+        AddReward(MaxStep == 0 ? 0 : -1f / MaxStep);
     }
 
     // Heuristic (player controlled)
     public override void Heuristic(float[] actionsOut)
     {
-        // actionsOut[0] == -1 back, 0 nothing, 1 forward
-        // actionsOut[1] == -1 turn left, 0 nothing, 1 turn right
-        actionsOut[0] = Input.GetAxis("Vertical");
-        actionsOut[1] = Input.GetAxis("Horizontal");
+        float forward = 1; // do nothing
+        float turn = 1; // do nothing
+
+        if (Input.GetKey(KeyCode.W)) forward += 1;
+        if (Input.GetKey(KeyCode.S)) forward -= 1;
+        if (Input.GetKey(KeyCode.A)) turn -= 1;
+        if (Input.GetKey(KeyCode.D)) turn += 1;
+
+        actionsOut[0] = forward;
+        actionsOut[1] = turn;
     }
 
-    public void OnCollisionStay(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (IsBadCollision(collision))
         {
-            AddReward(-0.1f); // Punishment for staying in bad collision
+            inBadCollision = true;
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        if (IsBadCollision(collision))
+        {
+            inBadCollision = false;
         }
     }
 

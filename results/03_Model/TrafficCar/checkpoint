@@ -1,0 +1,2 @@
+model_checkpoint_path: "TrafficCar-200040.ckpt"
+all_model_checkpoint_paths: "TrafficCar-200040.ckpt"

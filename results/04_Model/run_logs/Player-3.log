@@ -1,0 +1,70 @@
+Mono path[0] = 'C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Managed'
+Mono config path = 'C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/MonoBleedingEdge/etc'
+Initialize engine version: 2020.1.12f1 (55b56f0a86e3)
+[Subsystems] Discovering subsystems at path C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/UnitySubsystems
+Forcing GfxDevice: Null
+GfxDevice: creating device client; threaded=0
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Begin MonoManager ReloadAssembly
+- Completed reload, in  0.160 seconds
+ERROR: Shader Hidden/Universal Render Pipeline/Blit shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/CopyDepth shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/ScreenSpaceShadows shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/Sampling shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/LutBuilderLdr shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/LutBuilderHdr shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/UberPost shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/Stop NaN shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/SubpixelMorphologicalAntialiasing shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/GaussianDepthOfField shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/BokehDepthOfField shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/CameraMotionBlur shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/PaniniProjection shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/Bloom shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Hidden/Universal Render Pipeline/FinalPost shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+ERROR: Shader Sprites/Default shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+Microsoft Media Foundation video decoding to texture disabled: graphics device is Null, only Direct3D 11 and Direct3D 12 (only on desktop) are supported.
+ERROR: Shader Sprites/Mask shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+Couldn't create a Convex Mesh from source mesh "SM_Veh_Car_Small_01" within the maximum polygons limit (256). The partial hull will be used. Consider simplifying your mesh. 
+(Filename:  Line: 91)
+
+Couldn't create a Convex Mesh from source mesh "SM_Veh_Car_Medium_01" within the maximum polygons limit (256). The partial hull will be used. Consider simplifying your mesh. 
+(Filename:  Line: 91)
+
+ERROR: Shader Legacy Shaders/Particles/Additive shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+WARNING: Shader Unsupported: 'Universal Render Pipeline/Lit' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+ERROR: Shader Universal Render Pipeline/Lit shader is not supported on this GPU (none of subshaders/fallbacks are suitable)
+WARNING: Shader Unsupported: 'Universal Render Pipeline/Lit' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+UnloadTime: 0.472900 ms
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libcoreclr.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libcoreclr.so.dll
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libcoreclr.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libdl.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libdl.so.dll
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libdl.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libSystem.dylib
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libSystem.dylib.dll
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libSystem.dylib
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libcoreclr.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libcoreclr.so.dll
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libcoreclr.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libdl.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libdl.so.dll
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libdl.so
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libSystem.dylib
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libSystem.dylib.dll
+Fallback handler could not load library C:/Users/Camilo/source/repos/crlimacastro/IGME797-Final-Project/Builds/01_Build/IGME797-Final_Data/Mono/libSystem.dylib
+failed to get 100ns ticks
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: 8f84 -> priority: 1 
+  Thread -> id: 5804 -> priority: 1 
+  Thread -> id: 7594 -> priority: 1 
+  Thread -> id: 1a20 -> priority: 1 
+Waiting on threads to park on joinable thread list timed out.
