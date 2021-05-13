@@ -1,0 +1,29 @@
+{
+    "TrafficCar": {
+        "checkpoints": [
+            {
+                "steps": 499952,
+                "file_path": "results\\05_Model\\TrafficCar\\TrafficCar-499952.nn",
+                "reward": null,
+                "creation_time": 1620828285.3116086
+            },
+            {
+                "steps": 715048,
+                "file_path": "results\\05_Model\\TrafficCar\\TrafficCar-715048.nn",
+                "reward": null,
+                "creation_time": 1620828798.1466596
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 715048,
+            "file_path": "results\\05_Model\\TrafficCar.nn",
+            "reward": null,
+            "creation_time": 1620828798.1466596
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.1.0",
+        "mlagents_version": "0.20.0",
+        "tensorflow_version": "2.3.2"
+    }
+}

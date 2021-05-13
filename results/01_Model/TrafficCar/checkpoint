@@ -1,4 +1,0 @@
-model_checkpoint_path: "TrafficCar-1000024.ckpt"
-all_model_checkpoint_paths: "TrafficCar-499960.ckpt"
-all_model_checkpoint_paths: "TrafficCar-999960.ckpt"
-all_model_checkpoint_paths: "TrafficCar-1000024.ckpt"

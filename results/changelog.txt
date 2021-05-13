@@ -1,0 +1,3 @@
+03 - Short imitation and and GAIL training (0.1, 1.0, 1.0).
+03 -> 04 - Changed to reinforcement learning for a 100k step training (1.0 , 0, 0).
+04 -> 05 Restarted training from zero with 200k step and just imitation and reinforcement (1.0, 0, 0.5).
