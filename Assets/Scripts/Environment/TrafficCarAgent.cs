@@ -55,7 +55,6 @@ public class TrafficCarAgent : Agent
 
             // Distance Observations
             float distanceToCheckpoint = vectorToCheckpoint.magnitude;
-
             sensor.AddObservation(distanceToCheckpoint); // float, 1 observation
 
             // Collision Observations
@@ -70,11 +69,11 @@ public class TrafficCarAgent : Agent
 
                 AddReward(0.001f); // Small reward for getting closer to the checkpoint
 
-                // Removed
-                //// Small reward for facing the checkpoint (does not punish by going into the negatives)
-                //AddReward(0.001f * Mathf.Clamp01(facingCheckpointDot));
-                ////// Small reward relative to how close to next checkpoint (avoids 0 division)
-                //AddReward(0.01f * distanceToCheckpoint == 0 ? 0 : 1f / distanceToCheckpoint);
+                // Scrapped!!!
+                // // Small reward for facing the checkpoint (does not punish by going into the negatives)
+                // AddReward(0.001f * Mathf.Clamp01(facingCheckpointDot));
+                // // Small reward relative to how close to next checkpoint (avoids 0 division)
+                // AddReward(0.01f * distanceToCheckpoint == 0 ? 0 : 1f / distanceToCheckpoint);
             }
 
             if (inBadCollision)
@@ -103,16 +102,15 @@ public class TrafficCarAgent : Agent
         carDriver.SetInputs(forward, turn);
 
         // Action Rewards
-        //if (inBadCollision && (forward != 0 && turn != 0))
-        //{
-        //    // Small reward back for moving while in a bad collision
-        //    // Encouraging agent to get out of bad collisions
-        //    AddReward(0.001f);
-        //}
+        if (inBadCollision && (forward != 0 && turn != 0))
+        {
+            // Small reward back for moving while in a bad collision
+            // Encouraging agent to get out of bad collisions
+            AddReward(0.001f);
+        }
 
-        // Removed
-        //// Existential punishment (avoids 0 division)
-        //AddReward(MaxStep == 0 ? 0 : -1f / MaxStep);
+        // Existential punishment (avoids 0 division)
+        AddReward(MaxStep == 0 ? 0 : -1f / MaxStep);
     }
 
     // Heuristic (player controlled)
@@ -151,11 +149,11 @@ public class TrafficCarAgent : Agent
         // If it is the current checkpoint the agent is looking for
         if (collider.transform == currentCheckpoint)
         {
-            // Reward for reaching the checkpoint facing it, punishment for driving into it backwards
-            Vector3 vectorToCheckpoint = currentCheckpoint.position - transform.position;
-            Vector3 normDirToCheckpoint = vectorToCheckpoint.normalized;
-            float facingCheckpointDot = Vector3.Dot(transform.forward, normDirToCheckpoint);
-            AddReward(1f * facingCheckpointDot);
+            // Reward for reaching a checkpoint that is not the first one
+            if (collider.transform != currentPath.Start)
+            {
+                AddReward(1f);
+            }
 
             // Set previous checkpoint to inactive
             currentCheckpoint.gameObject.SetActive(false);
@@ -165,8 +163,9 @@ public class TrafficCarAgent : Agent
             
             if (currentCheckpoint)
             {
-                // Update closest distance reached
-                distanceMilestone = GetDistanceToCheckpoint(currentCheckpoint);
+                // Reset distances
+                float distanceToCheckpoint = GetDistanceToCheckpoint(currentCheckpoint);
+                distanceMilestone = distanceToCheckpoint;
 
                 // Set the current checkpoint to active
                 currentCheckpoint.gameObject.SetActive(true);
@@ -206,8 +205,9 @@ public class TrafficCarAgent : Agent
 
         // Set the current checkpoint to the first in the path
         currentCheckpoint = currentPath.Start;
-        // Update closest distance reached
-        distanceMilestone = GetDistanceToCheckpoint(currentCheckpoint);
+        // Init distances
+        float distanceToCheckpoint = GetDistanceToCheckpoint(currentCheckpoint);
+        distanceMilestone = distanceToCheckpoint;
     }
 
     private float GetDistanceToCheckpoint(Transform checkpoint)

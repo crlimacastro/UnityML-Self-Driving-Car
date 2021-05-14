@@ -21,14 +21,10 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-      curiosity:
-        strength: 0.02
-        gamma: 0.99
-      gail:
         gamma: 0.99
         strength: 0.01
         demo_path: Demos/CarAgentDemo.demo
     behavioral_cloning:
-      strength: 0.5
+      strength: 1.0
       demo_path: Demos/CarAgentDemo.demo
       steps: 200000

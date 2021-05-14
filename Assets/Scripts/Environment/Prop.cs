@@ -11,9 +11,9 @@ public class Prop : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
         academyManager = FindObjectOfType<AcademyManager>();
 
+        rb.isKinematic = true;
         startPosition = transform.position;
         startRotation = transform.rotation;
     }
