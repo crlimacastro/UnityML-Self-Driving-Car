@@ -21,6 +21,7 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
+      gail:
         gamma: 0.99
         strength: 0.01
         demo_path: Demos/CarAgentDemo.demo
